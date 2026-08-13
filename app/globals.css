@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --navy-primary: #16324F;
+    --navy-dark: #0B1927;
+    --navy-light: #234668;
+    --ivory-bg: #F8F7F2;
+    --paper-white: #FFFFFF;
+    --slate-ink: #202832;
+    --muted-slate: #697480;
+    --governance-teal: #537C78;
+    --teal-light: #E8EFEB;
+    --academic-gold: #B99A5E;
+    --academic-gold-light: #F4EEDF;
+    --pale-sage: #E8EFEB;
+    --pale-blue: #EAF0F5;
+    --border-subtle: rgba(22, 50, 79, 0.12);
+    --border-strong: rgba(22, 50, 79, 0.24);
+    
+    --font-serif: var(--font-source-serif), Georgia, Cambria, serif;
+    --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+    --font-mono: var(--font-mono), monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--ivory-bg);
+    color: var(--slate-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--ivory-bg);
+    color: var(--slate-ink);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Paper texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background-color: rgba(185, 154, 94, 0.25);
+    color: #16324F;
+  }
+}
+
+/* Custom Typography Utilities */
+.font-serif-display {
+  font-family: var(--font-serif);
+}
+
+.font-sans-ui {
+  font-family: var(--font-sans);
+}
+
+.font-mono-meta {
+  font-family: var(--font-mono);
+}
+
+/* Custom Utilities */
+.bg-ivory {
+  background-color: var(--ivory-bg);
+}
+
+.bg-paper {
+  background-color: var(--paper-white);
+}
+
+.bg-navy-primary {
+  background-color: var(--navy-primary);
+}
+
+.bg-navy-dark {
+  background-color: var(--navy-dark);
+}
+
+.text-navy-primary {
+  color: var(--navy-primary);
+}
+
+.text-governance-teal {
+  color: var(--governance-teal);
+}
+
+.text-academic-gold {
+  color: var(--academic-gold);
+}
+
+.border-editorial {
+  border-color: var(--border-subtle);
+}
+
+.border-editorial-strong {
+  border-color: var(--border-strong);
+}
+
+/* 3D Perspective Cover System */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.journal-cover-3d {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transform: rotateY(-3deg) rotateX(1deg);
+  box-shadow: -15px 20px 35px -10px rgba(22, 50, 79, 0.25), 0 0 0 1px rgba(185, 154, 94, 0.3);
+}
+
+.journal-cover-3d:hover {
+  transform: rotateY(0deg) rotateX(0deg) translateY(-6px);
+  box-shadow: -20px 30px 45px -12px rgba(22, 50, 79, 0.35), 0 0 0 1px rgba(185, 154, 94, 0.5);
+}
+
+/* Editorial Rule Lines */
+.editorial-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(22, 50, 79, 0.18) 20%, rgba(22, 50, 79, 0.18) 80%, transparent);
+}
+
+.editorial-rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(185, 154, 94, 0.4) 20%, rgba(185, 154, 94, 0.4) 80%, transparent);
+}
+
+/* Animated Underline Effect */
+.hover-underline-animation {
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Academic Footnote Sup Styling */
+.footnote-ref {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--academic-gold);
+  padding: 0 2px;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.footnote-ref:hover {
+  color: var(--navy-primary);
+  text-decoration: underline;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(22, 50, 79, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 50, 79, 0.45);
+}
+
+/* Governance Grid Background Effect */
+.bg-governance-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(22, 50, 79, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 50, 79, 0.04) 1px, transparent 1px);
+}
+
+.bg-governance-grid-dark {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Reading container constraint */
+.reading-prose {
+  max-width: 760px;
+  line-height: 1.85;
+  font-size: 1.125rem;
+}
+
+@media print {
+  body::before {
+    display: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
