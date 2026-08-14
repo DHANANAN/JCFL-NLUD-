@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Search, ChevronDown, Menu, X, ArrowUpRight, BookOpen, Building, Users, FileText, Library } from "lucide-react";
+import { Search, ChevronDown, Menu, X, ArrowUpRight, BookOpen, Building, Users, FileText, Library, Landmark } from "lucide-react";
 import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
@@ -38,10 +38,10 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo & Identity */}
           <Link href="/" className="flex items-center gap-3.5 group">
-            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#B99A5E]/40 shadow-xs group-hover:border-[#B99A5E] transition-all bg-[#16324F] shrink-0">
+            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#B99A5E]/50 shadow-sm group-hover:border-[#B99A5E] transition-all bg-[#16324F] shrink-0">
               <Image
                 src="/assets/images/cclgfl-logo.jpg"
-                alt="Centre for Corporate Law, Governance & Financial Laws Logo"
+                alt="Centre for Corporate Law, Governance & Financial Laws, NLU Delhi Logo"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
                 priority
@@ -49,10 +49,10 @@ export function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="font-serif-display font-bold text-[#16324F] text-base sm:text-lg lg:text-xl tracking-tight leading-none group-hover:text-[#16324F]/90">
-                Journal of Corporate & Financial Laws
+                Journal of Corporate &amp; Financial Laws
               </span>
-              <span className="font-sans-ui text-[10px] sm:text-[11px] text-[#697480] uppercase tracking-wider font-medium mt-1">
-                Centre for Corporate Law, Governance & Financial Laws
+              <span className="font-sans-ui text-[10px] sm:text-[11px] text-[#697480] uppercase tracking-wider font-semibold mt-1">
+                CCLGFL · National Law University Delhi
               </span>
             </div>
           </Link>
@@ -62,7 +62,7 @@ export function Navbar() {
             <Link
               href="/"
               className={`transition-colors hover:text-[#16324F] hover-underline-animation ${
-                pathname === "/" ? "text-[#16324F] font-semibold" : "text-[#202832]/80"
+                pathname === "/" ? "text-[#16324F] font-bold" : "text-[#202832]/80"
               }`}
             >
               Home
@@ -76,7 +76,7 @@ export function Navbar() {
             >
               <button
                 className={`flex items-center gap-1 transition-colors hover:text-[#16324F] ${
-                  pathname.startsWith("/about") ? "text-[#16324F] font-semibold" : "text-[#202832]/80"
+                  pathname.startsWith("/about") ? "text-[#16324F] font-bold" : "text-[#202832]/80"
                 }`}
                 aria-expanded={aboutDropdownOpen}
               >
@@ -86,36 +86,36 @@ export function Navbar() {
 
               {aboutDropdownOpen && (
                 <div className="absolute top-full -left-4 w-72 pt-3 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="bg-white rounded-lg shadow-xl border border-[#16324F]/10 p-2 text-sm">
+                  <div className="bg-white rounded-xl shadow-2xl border border-[#16324F]/10 p-2 text-sm">
                     <Link
                       href="/about/journal"
-                      className="flex items-start gap-3 p-2.5 rounded-md hover:bg-[#F8F7F2] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F8F7F2] transition-colors group"
                     >
                       <BookOpen className="w-4 h-4 text-[#16324F] mt-0.5 group-hover:text-[#B99A5E] transition-colors" />
                       <div>
-                        <div className="font-medium text-[#16324F]">About the Journal</div>
+                        <div className="font-semibold text-[#16324F]">About the Journal</div>
                         <div className="text-xs text-[#697480]">Aims, scope, ethics, and review model</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/about/centre"
-                      className="flex items-start gap-3 p-2.5 rounded-md hover:bg-[#F8F7F2] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F8F7F2] transition-colors group"
                     >
                       <Building className="w-4 h-4 text-[#16324F] mt-0.5 group-hover:text-[#B99A5E] transition-colors" />
                       <div>
-                        <div className="font-medium text-[#16324F]">About the Centre</div>
+                        <div className="font-semibold text-[#16324F]">About CCLGFL (NLU Delhi)</div>
                         <div className="text-xs text-[#697480]">Institutional profile & research clusters</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/about/editorial-board"
-                      className="flex items-start gap-3 p-2.5 rounded-md hover:bg-[#F8F7F2] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F8F7F2] transition-colors group"
                     >
                       <Users className="w-4 h-4 text-[#16324F] mt-0.5 group-hover:text-[#B99A5E] transition-colors" />
                       <div>
-                        <div className="font-medium text-[#16324F]">Faculty Advisors & Editorial Board</div>
+                        <div className="font-semibold text-[#16324F]">Faculty Advisors & Board</div>
                         <div className="text-xs text-[#697480]">Patrons, advisors, and student editors</div>
                       </div>
                     </Link>
@@ -132,7 +132,7 @@ export function Navbar() {
             >
               <button
                 className={`flex items-center gap-1 transition-colors hover:text-[#16324F] ${
-                  pathname.startsWith("/publications") ? "text-[#16324F] font-semibold" : "text-[#202832]/80"
+                  pathname.startsWith("/publications") ? "text-[#16324F] font-bold" : "text-[#202832]/80"
                 }`}
               >
                 <span>Publications</span>
@@ -141,25 +141,25 @@ export function Navbar() {
 
               {publicationsDropdownOpen && (
                 <div className="absolute top-full -left-4 w-64 pt-3 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="bg-white rounded-lg shadow-xl border border-[#16324F]/10 p-2 text-sm">
+                  <div className="bg-white rounded-xl shadow-2xl border border-[#16324F]/10 p-2 text-sm">
                     <Link
                       href="/publications"
-                      className="flex items-start gap-3 p-2.5 rounded-md hover:bg-[#F8F7F2] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F8F7F2] transition-colors group"
                     >
                       <FileText className="w-4 h-4 text-[#16324F] mt-0.5 group-hover:text-[#B99A5E] transition-colors" />
                       <div>
-                        <div className="font-medium text-[#16324F]">Current Issue (Vol. 1)</div>
+                        <div className="font-semibold text-[#16324F]">Current Issue (Vol. 1)</div>
                         <div className="text-xs text-[#697480]">Inaugural scholarship repository</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/publications/archive"
-                      className="flex items-start gap-3 p-2.5 rounded-md hover:bg-[#F8F7F2] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#F8F7F2] transition-colors group"
                     >
                       <Library className="w-4 h-4 text-[#16324F] mt-0.5 group-hover:text-[#B99A5E] transition-colors" />
                       <div>
-                        <div className="font-medium text-[#16324F]">Journal Archive</div>
+                        <div className="font-semibold text-[#16324F]">Journal Archive</div>
                         <div className="text-xs text-[#697480]">Past volumes and future editions</div>
                       </div>
                     </Link>
@@ -171,7 +171,7 @@ export function Navbar() {
             <Link
               href="/submission-guidelines"
               className={`transition-colors hover:text-[#16324F] hover-underline-animation ${
-                pathname === "/submission-guidelines" ? "text-[#16324F] font-semibold" : "text-[#202832]/80"
+                pathname === "/submission-guidelines" ? "text-[#16324F] font-bold" : "text-[#202832]/80"
               }`}
             >
               Submission Guidelines

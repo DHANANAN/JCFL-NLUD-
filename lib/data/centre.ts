@@ -1,6 +1,7 @@
 export interface CentreData {
   name: string;
   shortName: string;
+  institution: string;
   tagline: string;
   vision: string;
   mission: string;
@@ -19,10 +20,11 @@ export interface CentreData {
 export const centreData: CentreData = {
   name: "Centre for Corporate Law, Governance & Financial Laws",
   shortName: "CCLGFL",
+  institution: "National Law University Delhi (NLU Delhi)",
   tagline: "Research. Dialogue. Institutional Impact.",
-  overview: "The Centre for Corporate Law, Governance & Financial Laws serves as a specialized institutional hub dedicated to rigorous empirical and doctrinal legal research, policy analysis, and scholarly dialogue at the confluence of corporate governance, capital markets, insolvency regimes, and financial regulation.",
-  vision: "To cultivate a leading institutional platform for legal scholarship that informs corporate jurisprudence, guides financial regulatory reform, and deepens understanding of market governance in emerging and developed economies.",
-  mission: "To foster cutting-edge legal research, facilitate constructive discourse between academia, regulatory authorities, and industry practitioners, and mentor the next generation of corporate and financial law scholars.",
+  overview: "The Centre for Corporate Law, Governance & Financial Laws at National Law University Delhi (NLU Delhi) serves as a specialized institutional hub dedicated to rigorous empirical and doctrinal legal research, policy analysis, and scholarly dialogue at the confluence of corporate governance, capital markets, insolvency regimes, and financial regulation.",
+  vision: "To cultivate a premier national and international institutional platform for legal scholarship that informs corporate jurisprudence, guides financial regulatory reform, and deepens understanding of market governance in emerging and developed economies.",
+  mission: "To foster cutting-edge legal research, facilitate constructive discourse between academia, regulatory authorities, and industry practitioners, and mentor the next generation of corporate and financial law scholars at National Law University Delhi.",
   pillars: [
     {
       title: "Scholarly Research",
@@ -71,7 +73,7 @@ export const centreData: CentreData = {
     },
     {
       title: "Annual Corporate Law Symposium",
-      description: "Annual gathering of legal academics, corporate partners, and regulatory policymakers.",
+      description: "Annual gathering of legal academics, corporate partners, and regulatory policymakers at NLU Delhi.",
       type: "Annual Conference"
     },
     {
@@ -81,9 +83,9 @@ export const centreData: CentreData = {
     }
   ],
   contact: {
-    email: "[INSERT OFFICIAL CENTRE EMAIL, e.g. cclgfl@institution.ac.in]",
+    email: "submissions.jcfl@institution.ac.in",
     office: "Centre for Corporate Law, Governance & Financial Laws",
-    address: "[INSERT OFFICIAL INSTITUTIONAL ADDRESS / CAMPUS LOCATION]",
+    address: "National Law University Delhi, Sector 14, Dwarka, New Delhi – 110078, India",
     workingHours: "Monday – Friday: 09:00 AM – 05:00 PM IST"
   }
 };

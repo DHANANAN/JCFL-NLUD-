@@ -5,6 +5,8 @@ import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/navigation/Footer";
 import { CommandPalette } from "@/components/search/CommandPalette";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { LoadingScreen } from "@/components/ui/LoadingScreen";
 
 const sourceSerif = Source_Serif_4({
   variable: "--font-source-serif",
@@ -29,14 +31,16 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://jcfl.law"),
   title: {
-    template: "%s | Journal of Corporate and Financial Laws",
-    default: "Journal of Corporate and Financial Laws | CCLGFL",
+    template: "%s | Journal of Corporate and Financial Laws (NLU Delhi)",
+    default: "Journal of Corporate and Financial Laws | CCLGFL, NLU Delhi",
   },
   description:
-    "A premier scholarly platform dedicated to rigorous research, critical analysis, and contemporary discourse across corporate law, governance, financial regulation, and commercial jurisprudence.",
+    "A premier scholarly platform published by the Centre for Corporate Law, Governance & Financial Laws at National Law University Delhi, dedicated to rigorous research across corporate governance, securities regulation, insolvency, and commercial jurisprudence.",
   keywords: [
     "Corporate Law",
     "Financial Law",
+    "National Law University Delhi",
+    "NLU Delhi",
     "Corporate Governance",
     "Securities Regulation",
     "Insolvency Law",
@@ -46,23 +50,23 @@ export const metadata: Metadata = {
     "CCLGFL",
     "JCFL"
   ],
-  authors: [{ name: "Centre for Corporate Law, Governance & Financial Laws" }],
-  creator: "Centre for Corporate Law, Governance & Financial Laws",
-  publisher: "Centre for Corporate Law, Governance & Financial Laws",
+  authors: [{ name: "Centre for Corporate Law, Governance & Financial Laws, NLU Delhi" }],
+  creator: "Centre for Corporate Law, Governance & Financial Laws, NLU Delhi",
+  publisher: "Centre for Corporate Law, Governance & Financial Laws, National Law University Delhi",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://jcfl.law",
-    siteName: "Journal of Corporate and Financial Laws",
-    title: "Journal of Corporate and Financial Laws | Inaugural Edition",
+    siteName: "Journal of Corporate and Financial Laws · NLU Delhi",
+    title: "Journal of Corporate and Financial Laws | CCLGFL, NLU Delhi",
     description:
-      "A scholarly platform dedicated to rigorous research across corporate law, governance, and financial markets.",
+      "A scholarly platform dedicated to rigorous research across corporate law, governance, and financial markets at National Law University Delhi.",
     images: [
       {
         url: "/assets/images/cclgfl-logo.jpg",
         width: 800,
         height: 800,
-        alt: "Centre for Corporate Law, Governance & Financial Laws",
+        alt: "Centre for Corporate Law, Governance & Financial Laws, NLU Delhi",
       },
     ],
   },
@@ -83,6 +87,8 @@ export default function RootLayout({
       className={`${sourceSerif.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory text-slate-ink selection:bg-[#B99A5E]/20 selection:text-[#16324F]">
+        <LoadingScreen />
+        <CustomCursor />
         <AnnouncementBar />
         <Navbar />
         <main className="flex-1">{children}</main>

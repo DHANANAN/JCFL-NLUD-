@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, FileCheck, ShieldCheck, Sparkles, Scale } from "lucide-react";
+import { ArrowRight, BookOpen, FileCheck, ShieldCheck, Sparkles, Scale, Landmark } from "lucide-react";
 import { GovernanceNetworkCanvas } from "./GovernanceNetworkCanvas";
 import { TextReveal } from "@/components/motion/TextReveal";
+import { ShakeButton } from "@/components/ui/ShakeButton";
 
 export function Hero() {
   return (
@@ -27,8 +28,8 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[#16324F]/15 bg-white/80 backdrop-blur-xs text-[#16324F] font-mono-meta text-[11px] uppercase tracking-widest font-semibold shadow-2xs"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B99A5E] animate-pulse" />
-              Centre for Corporate Law, Governance &amp; Financial Laws
+              <Landmark className="w-3.5 h-3.5 text-[#B99A5E]" />
+              National Law University Delhi · CCLGFL
             </motion.div>
 
             {/* Main Editorial Headline with Masked Reveal */}
@@ -51,7 +52,7 @@ export function Hero() {
               transition={{ duration: 0.55, delay: 0.45 }}
               className="text-[#202832]/85 text-base sm:text-lg lg:text-xl font-sans-ui leading-relaxed max-w-2xl font-light"
             >
-              A premier scholarly platform dedicated to rigorous research, doctrinal clarity, and contemporary discourse across corporate law, governance, financial regulation, and commercial jurisprudence.
+              A premier scholarly platform published by the Centre for Corporate Law, Governance &amp; Financial Laws at National Law University Delhi, dedicated to rigorous doctrinal and empirical discourse across corporate governance, capital markets, insolvency, and digital finance.
             </motion.p>
 
             {/* Action Buttons */}
@@ -88,7 +89,7 @@ export function Hero() {
             >
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#537C78]" />
-                <span>Inaugural Volume 1 (2026)</span>
+                <span>NLU Delhi Inaugural Volume 1 (2026)</span>
               </div>
               <span className="text-[#16324F]/20">·</span>
               <div>Double-Blind Peer Review</div>
@@ -111,7 +112,7 @@ export function Hero() {
                   GOVERNANCE NETWORK
                 </div>
                 <span className="text-[10px] bg-[#16324F]/05 px-2 py-0.5 rounded border border-[#16324F]/10 font-bold text-[#16324F]">
-                  LAW × GOVERNANCE × CAPITAL
+                  NLU DELHI // LAW × CAPITAL
                 </span>
               </div>
 
