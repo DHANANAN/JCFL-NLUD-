@@ -3,57 +3,51 @@ import { GrandCarousel } from "@/components/home/GrandCarousel";
 import { InauguralIssueSection } from "@/components/home/InauguralIssueSection";
 import { FeaturedScholarship } from "@/components/home/FeaturedScholarship";
 import { CentreMissionInfographic } from "@/components/home/CentreMissionInfographic";
-import { JournalMandate } from "@/components/home/JournalMandate";
 import { ResearchAreaGrid } from "@/components/home/ResearchAreaGrid";
 import { JurisprudenceTimeline } from "@/components/home/JurisprudenceTimeline";
 import { AboutCentreSection } from "@/components/home/AboutCentreSection";
-import { LatestPublicationsTable } from "@/components/home/LatestPublicationsTable";
 import { ExpandableEditorialDesk } from "@/components/home/ExpandableEditorialDesk";
 import { SubmissionCallout } from "@/components/home/SubmissionCallout";
 import { JournalMetadataStrip } from "@/components/home/JournalMetadataStrip";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* 1. Monumental Hero Section */}
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
+      {/* 1. Hero with organic blobs & canvas */}
       <Hero />
 
-      {/* 2. Swipeable Interactive Grand Carousel */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
-        <GrandCarousel />
+      {/* 2. Swipeable Grand Carousel */}
+      <div className="bg-[#FAF9F4] py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GrandCarousel />
+        </div>
       </div>
 
-      {/* 3. Collectible Inaugural Issue 3D Section */}
-      <InauguralIssueSection />
-
-      {/* 4. Curated Featured Scholarship */}
+      {/* 3. Featured Scholarship — warm background with wave dividers */}
       <FeaturedScholarship />
 
-      {/* 5. Interactive 4-Pillar Mission Infographics */}
+      {/* 4. Inaugural Issue 3D collectible */}
+      <InauguralIssueSection />
+
+      {/* 5. CCLGFL Four Pillars Infographic */}
       <CentreMissionInfographic />
 
-      {/* 6. Aims, Scope & Academic Mandate */}
-      <JournalMandate />
-
-      {/* 7. Thematic Taxonomy Research Grid */}
+      {/* 6. Research Disciplines with SVG pictographs */}
       <ResearchAreaGrid />
 
-      {/* 8. Parallax Jurisprudence Evolution Timeline */}
+      {/* 7. Jurisprudence Timeline */}
       <JurisprudenceTimeline />
 
-      {/* 9. Inaugural Issue Comprehensive Table */}
-      <LatestPublicationsTable />
-
-      {/* 10. Expandable Editorial Address */}
-      <ExpandableEditorialDesk />
-
-      {/* 11. Institutional Profile of CCLGFL at NLU Delhi */}
+      {/* 8. About the Centre at NLU Delhi */}
       <AboutCentreSection />
 
-      {/* 12. Call for Papers & Submissions */}
+      {/* 9. Expandable Editorial Address */}
+      <ExpandableEditorialDesk />
+
+      {/* 10. Submission CTA — dark navy with illustration */}
       <SubmissionCallout />
 
-      {/* 13. Metadata Strip */}
+      {/* 11. Metadata Strip */}
       <JournalMetadataStrip />
     </div>
   );

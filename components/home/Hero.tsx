@@ -2,125 +2,174 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, FileCheck, ShieldCheck, Sparkles, Scale, Landmark } from "lucide-react";
+import { ArrowRight, FileCheck, ShieldCheck } from "lucide-react";
 import { GovernanceNetworkCanvas } from "./GovernanceNetworkCanvas";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { ShakeButton } from "@/components/ui/ShakeButton";
+
+// Decorative floating SVG shapes
+function FloatingShape({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 120" className={className} fill="none">
+      <circle cx="60" cy="60" r="55" stroke="currentColor" strokeWidth="1" strokeDasharray="4 6" opacity="0.5" />
+      <circle cx="60" cy="60" r="35" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
+      <path d="M60 20 L80 50 L60 80 L40 50 Z" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+    </svg>
+  );
+}
+
+function ScaleIcon() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
+      <line x1="40" y1="10" x2="40" y2="70" stroke="#B8943F" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="10" y1="28" x2="70" y2="28" stroke="#B8943F" strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M10 28 Q18 48 26 48 Q34 48 26 28" stroke="#16324F" strokeWidth="1.8" fill="rgba(22,50,79,0.06)"/>
+      <path d="M70 28 Q62 48 54 48 Q46 48 54 28" stroke="#3D7068" strokeWidth="1.8" fill="rgba(61,112,104,0.06)"/>
+      <line x1="28" y1="70" x2="52" y2="70" stroke="#B8943F" strokeWidth="3" strokeLinecap="round"/>
+    </svg>
+  );
+}
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-[#16324F]/10">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 bg-governance-grid opacity-60 pointer-events-none" />
+    <section className="relative overflow-hidden min-h-[92vh] flex flex-col justify-center">
+      {/* Warm organic dot-matrix background */}
+      <div className="absolute inset-0 bg-governance-grid pointer-events-none" />
 
-      {/* Floating Glow Ambient Spheres */}
-      <div className="absolute top-10 right-1/4 w-80 h-80 bg-[#B99A5E]/08 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#537C78]/08 rounded-full blur-3xl pointer-events-none" />
+      {/* Big ambient blob — warm gold, top-right */}
+      <div className="absolute -top-24 -right-24 w-[520px] h-[520px] organic-blob bg-[#D4A843]/10 animate-drift pointer-events-none" />
+      {/* Navy blob, bottom-left */}
+      <div className="absolute -bottom-32 -left-32 w-[420px] h-[420px] organic-blob-2 bg-[#16324F]/06 animate-float-reverse pointer-events-none" />
+      {/* Teal accent mid */}
+      <div className="absolute top-1/2 left-1/4 w-64 h-64 organic-blob bg-[#3D7068]/07 animate-float pointer-events-none blur-2xl" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Editorial Headline & Actions (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 lg:space-y-8">
-            {/* Eyebrow badge */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+
+          {/* ── Left: Editorial headline (7 cols) ── */}
+          <div className="lg:col-span-7 space-y-8">
+
+            {/* NLU Delhi pill */}
             <motion.div
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[#16324F]/15 bg-white/80 backdrop-blur-xs text-[#16324F] font-mono-meta text-[11px] uppercase tracking-widest font-semibold shadow-2xs"
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="inline-flex items-center gap-2.5"
             >
-              <Landmark className="w-3.5 h-3.5 text-[#B99A5E]" />
-              National Law University Delhi · CCLGFL
+              <span className="tag-pill bg-[#16324F] text-[#F7F0DE]">
+                NLU Delhi · CCLGFL
+              </span>
+              <span className="tag-pill bg-[#B8943F]/15 text-[#7A5C18]">
+                Inaugural Edition 2026
+              </span>
             </motion.div>
 
-            {/* Main Editorial Headline with Masked Reveal */}
-            <div className="space-y-1">
-              <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-[#16324F] tracking-tight leading-[1.06]">
-                <TextReveal text="Journal of" delay={0.15} as="span" />
+            {/* Headline */}
+            <div>
+              <h1 className="font-display text-[3.2rem] sm:text-[4.2rem] lg:text-[5rem] xl:text-[5.8rem] font-black text-[#16324F] leading-[0.95] tracking-tight">
+                <TextReveal text="Journal of" delay={0.1} as="span" />
                 <br />
-                <span className="text-[#16324F] italic font-normal">
-                  <TextReveal text="Corporate &" delay={0.25} as="span" />
-                </span>
+                <em className="font-normal text-[#B8943F] not-italic" style={{ fontStyle: 'italic' }}>
+                  <TextReveal text="Corporate &" delay={0.2} as="span" />
+                </em>
                 <br />
-                <TextReveal text="Financial Laws" delay={0.35} as="span" />
+                <TextReveal text="Financial Laws" delay={0.3} as="span" />
               </h1>
+
+              {/* Decorative rule under headline */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.6, duration: 0.8, ease: [0.16,1,0.3,1] }}
+                className="mt-6 h-px origin-left bg-gradient-to-r from-[#B8943F] via-[#B8943F]/50 to-transparent w-3/4"
+              />
             </div>
 
-            {/* Supporting Copy */}
+            {/* Subline */}
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.45 }}
-              className="text-[#202832]/85 text-base sm:text-lg lg:text-xl font-sans-ui leading-relaxed max-w-2xl font-light"
+              className="text-[#3A4A5C] text-lg sm:text-xl font-editorial leading-relaxed max-w-[520px] font-normal"
             >
-              A premier scholarly platform published by the Centre for Corporate Law, Governance &amp; Financial Laws at National Law University Delhi, dedicated to rigorous doctrinal and empirical discourse across corporate governance, capital markets, insolvency, and digital finance.
+              A peer-reviewed scholarly forum on corporate governance, capital markets, insolvency, and financial regulation — published by the Centre for Corporate Law, Governance &amp; Financial Laws at <strong className="text-[#16324F]">National Law University Delhi.</strong>
             </motion.p>
 
-            {/* Action Buttons */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.55 }}
-              className="flex flex-wrap items-center gap-4 pt-2"
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex flex-wrap items-center gap-4"
             >
-              <Link
-                href="/publications"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-[#16324F] text-[#F8F7F2] font-sans-ui text-sm font-semibold hover:bg-[#0D1F31] hover:shadow-xl transition-all duration-200 group relative overflow-hidden"
-              >
-                <BookOpen className="w-4 h-4 text-[#B99A5E]" />
-                <span>Explore Publications</span>
-                <ArrowRight className="w-4 h-4 text-[#B99A5E] group-hover:translate-x-1.5 transition-transform" />
+              <Link href="/publications" className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#16324F] text-[#FAF9F4] font-sans-ui text-sm font-semibold hover:bg-[#0D1F31] transition-all duration-300 shadow-lg shadow-[#16324F]/20 hover:shadow-xl hover:shadow-[#16324F]/30 hover:-translate-y-0.5">
+                Read Vol. 1 · Issue 1
+                <ArrowRight className="w-4 h-4 text-[#B8943F] group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              <Link
-                href="/submission-guidelines"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md border border-[#16324F]/25 bg-white/90 hover:bg-white text-[#16324F] font-sans-ui text-sm font-semibold transition-all duration-200 shadow-2xs hover:border-[#16324F]/50 hover:shadow-md"
-              >
-                <FileCheck className="w-4 h-4 text-[#537C78]" />
-                <span>Submission Guidelines</span>
+              <Link href="/submission-guidelines" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#16324F]/20 text-[#16324F] font-sans-ui text-sm font-semibold hover:bg-[#16324F]/05 transition-all duration-200">
+                <FileCheck className="w-4 h-4 text-[#3D7068]" />
+                Submit a Manuscript
               </Link>
             </motion.div>
 
-            {/* Institutional Metadata Badges */}
+            {/* Trust signals */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="pt-4 border-t border-[#16324F]/10 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-[#697480] font-mono-meta"
+              transition={{ delay: 0.8 }}
+              className="flex flex-wrap items-center gap-5 text-xs font-sans-ui text-[#6B7A8D]"
             >
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#537C78]" />
-                <span>NLU Delhi Inaugural Volume 1 (2026)</span>
-              </div>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#3D7068]" />
+                Double-Blind Peer Reviewed
+              </span>
               <span className="text-[#16324F]/20">·</span>
-              <div>Double-Blind Peer Review</div>
+              <span>Diamond Open Access</span>
               <span className="text-[#16324F]/20">·</span>
-              <div>Diamond Open Access</div>
+              <span>Bluebook 21st Citation Standard</span>
             </motion.div>
           </div>
 
-          {/* Right Column: Signature Governance Network (5 cols) */}
+          {/* ── Right: Organic canvas widget (5 cols) ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="lg:col-span-5 relative flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.16,1,0.3,1] }}
+            className="lg:col-span-5 relative"
           >
-            <div className="w-full relative rounded-2xl bg-gradient-to-b from-white/95 to-[#F8F7F2]/60 border border-[#16324F]/15 p-4 shadow-xl backdrop-blur-md">
-              <div className="flex items-center justify-between pb-3 mb-2 border-b border-[#16324F]/08 text-xs font-mono-meta text-[#697480]">
-                <div className="flex items-center gap-1.5 font-medium text-[#16324F]">
-                  <span className="w-2 h-2 rounded-full bg-[#537C78] animate-pulse" />
-                  GOVERNANCE NETWORK
+            {/* Floating SVG decoration */}
+            <FloatingShape className="absolute -top-10 -right-6 w-28 h-28 text-[#B8943F] animate-float opacity-70" />
+            <FloatingShape className="absolute -bottom-8 -left-4 w-20 h-20 text-[#3D7068] animate-float-reverse opacity-50" />
+
+            {/* Canvas container — organic shape */}
+            <div className="relative rounded-[2.5rem] bg-gradient-to-br from-white via-[#FAF9F4] to-[#F0EEE7] border border-[#16324F]/10 p-5 shadow-2xl shadow-[#16324F]/12">
+              {/* Mini header */}
+              <div className="flex items-center justify-between mb-3 text-xs font-mono-meta text-[#6B7A8D]">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#3D7068] animate-pulse" />
+                  <span className="font-semibold text-[#16324F]">GOVERNANCE NEXUS</span>
                 </div>
-                <span className="text-[10px] bg-[#16324F]/05 px-2 py-0.5 rounded border border-[#16324F]/10 font-bold text-[#16324F]">
-                  NLU DELHI // LAW × CAPITAL
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#16324F]/06 border border-[#16324F]/10 font-semibold">
+                  LIVE · 60FPS
                 </span>
               </div>
 
-              {/* Interactive Canvas */}
               <GovernanceNetworkCanvas />
+
+              {/* Floating scale icon overlay */}
+              <div className="absolute bottom-4 right-4 w-14 h-14 opacity-20">
+                <ScaleIcon />
+              </div>
             </div>
           </motion.div>
         </div>
+      </div>
+
+      {/* Organic wave bottom */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" className="w-full h-12">
+          <path d="M0,40 C240,10 480,60 720,35 C960,10 1200,55 1440,30 L1440,60 L0,60 Z" fill="#F5F2EA" />
+        </svg>
       </div>
     </section>
   );
