@@ -1,19 +1,50 @@
-/* script.js — JCFL Website */
+/* ================================================================
+   script.js — Journal of Corporate and Financial Laws (JCFL)
+   CCLGFL · National Law University Delhi
+   Traditional Academic Law Review Interactive Core
+   ================================================================ */
+
 (function () {
   'use strict';
 
   var LOGO_URL = 'https://i.ibb.co/23fPdtdF/OPv-Xht-Cx.jpg';
 
-  /* ── Fix any broken logo images ── */
+  /* ── 1. Page Progress & Slow Sleek Reveal on Load ── */
+  var progressBar = document.createElement('div');
+  progressBar.id = 'page-progress-bar';
+  document.body.prepend(progressBar);
+
+  // Animate progress bar gently on load
+  setTimeout(function () {
+    progressBar.style.width = '70%';
+  }, 50);
+
+  window.addEventListener('load', function () {
+    progressBar.style.width = '100%';
+    setTimeout(function () {
+      progressBar.style.opacity = '0';
+      document.body.classList.add('page-loaded');
+      setTimeout(function () {
+        if (progressBar.parentNode) progressBar.remove();
+      }, 500);
+    }, 450);
+  });
+
+  /* ── 2. Universal Logo Fallback Protection ── */
   function fixLogos() {
-    var imgs = document.querySelectorAll('img[data-logo]');
+    var imgs = document.querySelectorAll('img[data-logo], .masthead-logo, .footer-logo, .cclgfl-logo-large');
     imgs.forEach(function (img) {
-      img.onerror = function () { this.src = LOGO_URL; };
-      if (!img.complete || img.naturalWidth === 0) { img.src = LOGO_URL; }
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = LOGO_URL;
+      };
+      if (!img.src || img.src === '' || img.src.indexOf('OPv-Xht-Cx.jpg') === -1) {
+        img.src = LOGO_URL;
+      }
     });
   }
 
-  /* ── Mobile Navigation Toggle ── */
+  /* ── 3. Mobile Navigation Menu ── */
   var mobileToggle = document.getElementById('mobile-toggle');
   var mobileMenu   = document.getElementById('mobile-menu');
 
@@ -29,7 +60,7 @@
     });
   }
 
-  /* ── Mobile Submenu Toggles ── */
+  /* ── 4. Mobile Submenu Accordions ── */
   var mobileParentBtns = document.querySelectorAll('.mobile-menu-link[aria-haspopup="true"]');
   mobileParentBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -43,7 +74,7 @@
     });
   });
 
-  /* ── Close mobile menu on outside click ── */
+  /* ── 5. Close Mobile Menu on Outside Click ── */
   document.addEventListener('click', function (e) {
     if (!mobileMenu || !mobileToggle) return;
     if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
@@ -53,7 +84,7 @@
     }
   });
 
-  /* ── Desktop dropdown keyboard nav ── */
+  /* ── 6. Desktop Accessible Keyboard Navigation ── */
   var navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(function (item) {
     var link    = item.querySelector('.nav-link');
@@ -83,7 +114,7 @@
     });
   });
 
-  /* ── Fade-in on scroll ── */
+  /* ── 7. Slow Sleek Scroll Reveal (Intersection Observer) ── */
   if ('IntersectionObserver' in window) {
     var fadeEls = document.querySelectorAll('.fade-in');
     var fadeObs = new IntersectionObserver(function (entries) {
@@ -93,37 +124,97 @@
           fadeObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     fadeEls.forEach(function (el) { fadeObs.observe(el); });
+  } else {
+    // Fallback if observer is unsupported
+    document.querySelectorAll('.fade-in').forEach(function (el) {
+      el.classList.add('visible');
+    });
   }
 
-  /* ── Contact form handler ── */
+  /* ── 8. One-Click Bluebook Citation Copy with Toast ── */
+  var toast = document.createElement('div');
+  toast.id = 'citation-toast';
+  toast.textContent = 'Citation copied to clipboard (Bluebook 21st ed.)';
+  document.body.appendChild(toast);
+
+  var toastTimer = null;
+  function showToast(text) {
+    if (toastTimer) clearTimeout(toastTimer);
+    toast.textContent = text || 'Citation copied to clipboard (Bluebook 21st ed.)';
+    toast.classList.add('show');
+    toastTimer = setTimeout(function () {
+      toast.classList.remove('show');
+    }, 2800);
+  }
+
+  document.addEventListener('click', function (e) {
+    var citeBtn = e.target.closest('[data-copy-citation]');
+    if (!citeBtn) return;
+    e.preventDefault();
+    var citation = citeBtn.getAttribute('data-copy-citation');
+    if (!citation) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(citation).then(function () {
+        showToast('✓ Citation copied: ' + citation.substring(0, 45) + '…');
+      }).catch(function () {
+        prompt('Copy citation manually:', citation);
+      });
+    } else {
+      prompt('Copy citation manually:', citation);
+    }
+  });
+
+  /* ── 9. Font Size Adjuster for Senior Scholars ── */
+  var savedFontSize = localStorage.getItem('jcfl-font-size');
+  if (savedFontSize) {
+    document.documentElement.style.fontSize = savedFontSize;
+  }
+
+  document.querySelectorAll('[data-font-size]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var size = this.getAttribute('data-font-size');
+      var newSize = '16px';
+      if (size === 'sm') newSize = '15px';
+      if (size === 'md') newSize = '16px';
+      if (size === 'lg') newSize = '18px';
+      document.documentElement.style.fontSize = newSize;
+      localStorage.setItem('jcfl-font-size', newSize);
+      showToast('Font size updated to ' + (size === 'lg' ? 'Large (18px)' : size === 'sm' ? 'Compact (15px)' : 'Standard (16px)'));
+    });
+  });
+
+  /* ── 10. Contact Form Handler ── */
   var contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = contactForm.querySelector('[type="submit"]');
       var orig = btn.textContent;
-      btn.textContent = 'Sending…';
+      btn.textContent = 'Transmitting to Secretariat…';
       btn.disabled = true;
       setTimeout(function () {
-        btn.textContent = 'Message Sent';
+        btn.textContent = '✓ Communication Logged';
+        showToast('Your inquiry has been transmitted to the JCFL Editorial Desk.');
         setTimeout(function () {
           btn.textContent = orig;
           btn.disabled = false;
           contactForm.reset();
-        }, 2500);
+        }, 3000);
       }, 1200);
     });
   }
 
-  /* ── Active nav link ── */
+  /* ── 11. Active Nav Link Detection ── */
   var currentPath = window.location.pathname.split('/').pop() || 'index.html';
   var navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(function (link) {
     var href = link.getAttribute('href');
     if (href && href.split('#')[0] === currentPath) {
-      link.closest('.nav-item') && link.closest('.nav-item').classList.add('active');
+      var item = link.closest('.nav-item');
+      if (item) item.classList.add('active');
     }
   });
 
