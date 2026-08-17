@@ -1,7 +1,7 @@
 /* ================================================================
    script.js — Journal of Corporate and Financial Laws (JCFL)
    CCLGFL · National Law University Delhi
-   Traditional Academic Law Review Interactive Core
+   Classical Academic Law Review Interactive Core
    ================================================================ */
 
 (function () {
@@ -9,15 +9,14 @@
 
   var LOGO_URL = 'https://i.ibb.co/23fPdtdF/OPv-Xht-Cx.jpg';
 
-  /* ── 1. Page Progress & Slow Sleek Reveal on Load ── */
+  /* ── 1. Page Progress & Gentle Reveal on Load ── */
   var progressBar = document.createElement('div');
   progressBar.id = 'page-progress-bar';
   document.body.prepend(progressBar);
 
-  // Animate progress bar gently on load
   setTimeout(function () {
     progressBar.style.width = '70%';
-  }, 50);
+  }, 40);
 
   window.addEventListener('load', function () {
     progressBar.style.width = '100%';
@@ -27,7 +26,7 @@
       setTimeout(function () {
         if (progressBar.parentNode) progressBar.remove();
       }, 500);
-    }, 450);
+    }, 400);
   });
 
   /* ── 2. Universal Logo Fallback Protection ── */
@@ -114,7 +113,7 @@
     });
   });
 
-  /* ── 7. Slow Sleek Scroll Reveal (Intersection Observer) ── */
+  /* ── 7. Gentle Scroll Reveal (Intersection Observer) ── */
   if ('IntersectionObserver' in window) {
     var fadeEls = document.querySelectorAll('.fade-in');
     var fadeObs = new IntersectionObserver(function (entries) {
@@ -127,13 +126,12 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     fadeEls.forEach(function (el) { fadeObs.observe(el); });
   } else {
-    // Fallback if observer is unsupported
     document.querySelectorAll('.fade-in').forEach(function (el) {
       el.classList.add('visible');
     });
   }
 
-  /* ── 8. One-Click Bluebook Citation Copy with Toast ── */
+  /* ── 8. One-Click Bluebook Citation Copy with Clean Toast ── */
   var toast = document.createElement('div');
   toast.id = 'citation-toast';
   toast.textContent = 'Citation copied to clipboard (Bluebook 21st ed.)';
@@ -158,7 +156,7 @@
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(citation).then(function () {
-        showToast('✓ Citation copied: ' + citation.substring(0, 45) + '…');
+        showToast('Citation copied to clipboard: ' + citation.substring(0, 48) + '…');
       }).catch(function () {
         prompt('Copy citation manually:', citation);
       });
@@ -176,13 +174,13 @@
   document.querySelectorAll('[data-font-size]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var size = this.getAttribute('data-font-size');
-      var newSize = '16px';
+      var newSize = '16.5px';
       if (size === 'sm') newSize = '15px';
-      if (size === 'md') newSize = '16px';
-      if (size === 'lg') newSize = '18px';
+      if (size === 'md') newSize = '16.5px';
+      if (size === 'lg') newSize = '18.5px';
       document.documentElement.style.fontSize = newSize;
       localStorage.setItem('jcfl-font-size', newSize);
-      showToast('Font size updated to ' + (size === 'lg' ? 'Large (18px)' : size === 'sm' ? 'Compact (15px)' : 'Standard (16px)'));
+      showToast('Font size adjusted to ' + (size === 'lg' ? 'Large (18.5px)' : size === 'sm' ? 'Compact (15px)' : 'Standard (16.5px)'));
     });
   });
 
@@ -196,8 +194,8 @@
       btn.textContent = 'Transmitting to Secretariat…';
       btn.disabled = true;
       setTimeout(function () {
-        btn.textContent = '✓ Communication Logged';
-        showToast('Your inquiry has been transmitted to the JCFL Editorial Desk.');
+        btn.textContent = 'Message Transmitted';
+        showToast('Your message has been received by the JCFL Editorial Desk.');
         setTimeout(function () {
           btn.textContent = orig;
           btn.disabled = false;
