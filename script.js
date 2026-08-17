@@ -7,8 +7,6 @@
 (function () {
   'use strict';
 
-  var LOGO_URL = 'https://i.ibb.co/23fPdtdF/OPv-Xht-Cx.jpg';
-
   /* ── 1. Page Progress & Gentle Reveal on Load ── */
   var progressBar = document.createElement('div');
   progressBar.id = 'page-progress-bar';
@@ -29,21 +27,7 @@
     }, 400);
   });
 
-  /* ── 2. Universal Logo Fallback Protection ── */
-  function fixLogos() {
-    var imgs = document.querySelectorAll('img[data-logo], .masthead-logo, .footer-logo, .cclgfl-logo-large');
-    imgs.forEach(function (img) {
-      img.onerror = function () {
-        this.onerror = null;
-        this.src = LOGO_URL;
-      };
-      if (!img.src || img.src === '' || img.src.indexOf('OPv-Xht-Cx.jpg') === -1) {
-        img.src = LOGO_URL;
-      }
-    });
-  }
-
-  /* ── 3. Mobile Navigation Menu ── */
+  /* ── 2. Mobile Navigation Menu ── */
   var mobileToggle = document.getElementById('mobile-toggle');
   var mobileMenu   = document.getElementById('mobile-menu');
 
@@ -59,7 +43,7 @@
     });
   }
 
-  /* ── 4. Mobile Submenu Accordions ── */
+  /* ── 3. Mobile Submenu Accordions ── */
   var mobileParentBtns = document.querySelectorAll('.mobile-menu-link[aria-haspopup="true"]');
   mobileParentBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -73,7 +57,7 @@
     });
   });
 
-  /* ── 5. Close Mobile Menu on Outside Click ── */
+  /* ── 4. Close Mobile Menu on Outside Click ── */
   document.addEventListener('click', function (e) {
     if (!mobileMenu || !mobileToggle) return;
     if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
@@ -83,7 +67,7 @@
     }
   });
 
-  /* ── 6. Desktop Accessible Keyboard Navigation ── */
+  /* ── 5. Desktop Accessible Keyboard Navigation ── */
   var navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(function (item) {
     var link    = item.querySelector('.nav-link');
@@ -113,7 +97,7 @@
     });
   });
 
-  /* ── 7. Gentle Scroll Reveal (Intersection Observer) ── */
+  /* ── 6. Gentle Scroll Reveal (Intersection Observer) ── */
   if ('IntersectionObserver' in window) {
     var fadeEls = document.querySelectorAll('.fade-in');
     var fadeObs = new IntersectionObserver(function (entries) {
@@ -131,7 +115,7 @@
     });
   }
 
-  /* ── 8. One-Click Bluebook Citation Copy with Clean Toast ── */
+  /* ── 7. One-Click Bluebook Citation Copy with Clean Toast ── */
   var toast = document.createElement('div');
   toast.id = 'citation-toast';
   toast.textContent = 'Citation copied to clipboard (Bluebook 21st ed.)';
@@ -156,7 +140,7 @@
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(citation).then(function () {
-        showToast('Citation copied to clipboard: ' + citation.substring(0, 48) + '…');
+        showToast('Citation copied: ' + citation.substring(0, 48) + '…');
       }).catch(function () {
         prompt('Copy citation manually:', citation);
       });
@@ -165,7 +149,7 @@
     }
   });
 
-  /* ── 9. Font Size Adjuster for Senior Scholars ── */
+  /* ── 8. Font Size Adjuster for High Readability ── */
   var savedFontSize = localStorage.getItem('jcfl-font-size');
   if (savedFontSize) {
     document.documentElement.style.fontSize = savedFontSize;
@@ -174,17 +158,17 @@
   document.querySelectorAll('[data-font-size]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var size = this.getAttribute('data-font-size');
-      var newSize = '16.5px';
+      var newSize = '16px';
       if (size === 'sm') newSize = '15px';
-      if (size === 'md') newSize = '16.5px';
-      if (size === 'lg') newSize = '18.5px';
+      if (size === 'md') newSize = '16px';
+      if (size === 'lg') newSize = '18px';
       document.documentElement.style.fontSize = newSize;
       localStorage.setItem('jcfl-font-size', newSize);
-      showToast('Font size adjusted to ' + (size === 'lg' ? 'Large (18.5px)' : size === 'sm' ? 'Compact (15px)' : 'Standard (16.5px)'));
+      showToast('Text size set to ' + (size === 'lg' ? 'Large (18px)' : size === 'sm' ? 'Compact (15px)' : 'Standard (16px)'));
     });
   });
 
-  /* ── 10. Contact Form Handler ── */
+  /* ── 9. Contact Form Handler ── */
   var contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
@@ -205,7 +189,7 @@
     });
   }
 
-  /* ── 11. Active Nav Link Detection ── */
+  /* ── 10. Active Nav Link Detection ── */
   var currentPath = window.location.pathname.split('/').pop() || 'index.html';
   var navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(function (link) {
@@ -216,5 +200,4 @@
     }
   });
 
-  fixLogos();
 })();
